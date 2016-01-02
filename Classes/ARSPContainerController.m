@@ -401,6 +401,7 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan &&
         [gestureRecognizer locationInView:self.panelViewController.view].y <
         MAX(self.swipableZoneHeight, self.visibleZoneHeight)) {
+        
         self.touchPointOffset = [gestureRecognizer locationInView:self.panelViewController.view];
         self.panelViewControllerShouldDrag = YES;
         [self installPanelViewControllerConstraintToBottom];
@@ -424,10 +425,11 @@
     else {
         if (self.panelViewControllerShouldDrag) {
             self.visibilityState = ARSPVisibilityStateIsDragging;
-            CGFloat offset = MAX(self.shouldOverlapMainViewController ? 0.0f : self.visibleZoneHeight, self.panelViewController.view.frame.size.height - [gestureRecognizer locationInView:self.view].y + self.touchPointOffset.y);
+            CGFloat offset = MAX(self.shouldOverlapMainViewController ? 0.0f : self.visibleZoneHeight, self.panelViewController.view.frame.size.height - [gestureRecognizer locationInView:self.view].y + self.touchPointOffset.y + self.panelMarginTop);
             if (self.dragDelegate) {
                 [self.dragDelegate panelControllerWasDragged:MIN(1.0f, roundf (100*offset/self.view.frame.size.height)/100.0)];
             }
+
             [self updateSlidingViewControllerFrameWithBottomOffset:MIN(offset, self.panelViewController.view.frame.size.height)];
         }
     }
