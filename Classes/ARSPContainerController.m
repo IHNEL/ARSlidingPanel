@@ -114,13 +114,13 @@
                                                                          attribute:NSLayoutAttributeBottom
                                                                         multiplier:1
                                                                           constant:0];
-    
+    float heightPercent = (_panelViewController.view.frame.size.height - self.panelMarginTop)/_panelViewController.view.frame.size.height;
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_panelViewController.view
                                                                         attribute:NSLayoutAttributeHeight
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:self.view
                                                                         attribute:NSLayoutAttributeHeight
-                                                                       multiplier:1
+                                                                       multiplier:heightPercent
                                                                          constant:0];
     
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_panelViewController.view
