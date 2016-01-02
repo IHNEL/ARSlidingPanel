@@ -44,10 +44,10 @@
  */
 @property (nonatomic) CGFloat swipableZoneHeight;
 /**
- Maximum panel height when maximized.
+ The top margin of panel view when it's maximized.
  Default is 0.0f, making the panel take up the entire screen.
  */
-@property (nonatomic) CGFloat maxPanelHeight;
+@property (nonatomic) CGFloat panelMarginTop;
 /**
  Panel view controller drops shadow
  Default value is NO

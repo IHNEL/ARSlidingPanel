@@ -38,6 +38,7 @@
     self.panelControllerContainer = (ARSPContainerController *)self.navigationController.parentViewController;
     self.panelControllerContainer.dragDelegate = self;
     self.panelControllerContainer.visibilityStateDelegate = self;
+    self.panelControllerContainer.panelMarginTop = 64;
 }
 
 - (void)viewWillAppear:(BOOL)animated

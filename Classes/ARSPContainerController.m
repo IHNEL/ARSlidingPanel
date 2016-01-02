@@ -275,7 +275,7 @@
                                                                             toItem:self.view
                                                                          attribute:NSLayoutAttributeTop
                                                                         multiplier:1
-                                                                          constant:self.maxPanelHeight ? self.view.frame.size.height - self.maxPanelHeight : 0];
+                                                                          constant:self.panelMarginTop ? self.panelMarginTop : 0];
     [self.view addConstraint:self.panelViewControllerTopConstraint];
 }
 
@@ -321,13 +321,17 @@
 {
     self.visibilityState = ARSPVisibilityStateIsMaximizing;
     CGFloat animationDuration = (self.animationDuration ? : 0.3f);
-    [self movePanelControllerWithBottomOffset:self.maxPanelHeight ? self.maxPanelHeight : self.panelViewController.view.frame.size.height
+    
+    float bottomOffset = self.panelMarginTop ? self.panelViewController.view.frame.size.height - self.panelMarginTop
+    : self.panelViewController.view.frame.size.height;
+    
+    [self movePanelControllerWithBottomOffset:bottomOffset
                                      animated:animated
                             animationDuration:animationDuration
                                    animations:animations
                                    completion:^{
                                        self.visibilityState = ARSPVisibilityStateMaximized;
-                                      [self installPanelViewControllerConstraintToTop];
+                                       [self installPanelViewControllerConstraintToTop];
                                        
                                        if (completion) {
                                            completion();
@@ -337,7 +341,7 @@
 
 - (void)minimizePanelControllerAnimated:(BOOL)animated animations:(void (^)(void))animations completion:(void (^)(void))completion
 {
-    CGFloat bottomOffset = (self.panelViewControllerTopConstraint.constant == 0 || self.panelViewControllerTopConstraint.constant == self.view.frame.size.height - self.maxPanelHeight)
+    CGFloat bottomOffset = (self.panelViewControllerTopConstraint.constant == 0 || self.panelViewControllerTopConstraint.constant == self.panelMarginTop)
     ? self.visibleZoneHeight - self.panelViewController.view.frame.size.height
     : self.visibleZoneHeight;
     self.visibilityState = ARSPVisibilityStateIsMinimizing;
