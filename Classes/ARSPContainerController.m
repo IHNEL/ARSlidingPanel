@@ -328,8 +328,7 @@
     self.visibilityState = ARSPVisibilityStateIsMaximizing;
     CGFloat animationDuration = (self.animationDuration ? : 0.3f);
     
-    float bottomOffset = self.panelMarginTop ? self.panelViewController.view.frame.size.height - self.panelMarginTop
-    : self.panelViewController.view.frame.size.height;
+    float bottomOffset = self.panelViewController.view.frame.size.height;
     
     [self movePanelControllerWithBottomOffset:bottomOffset
                                      animated:animated
@@ -347,9 +346,10 @@
 
 - (void)minimizePanelControllerAnimated:(BOOL)animated animations:(void (^)(void))animations completion:(void (^)(void))completion
 {
-    CGFloat bottomOffset = (self.panelViewControllerTopConstraint.constant == 0 || self.panelViewControllerTopConstraint.constant == self.panelMarginTop)
+    CGFloat bottomOffset = (self.panelViewControllerTopConstraint.constant == self.panelMarginTop)
     ? self.visibleZoneHeight - self.panelViewController.view.frame.size.height
     : self.visibleZoneHeight;
+    
     self.visibilityState = ARSPVisibilityStateIsMinimizing;
     CGFloat animationDuration = (self.animationDuration ? : 0.3f);
     [self movePanelControllerWithBottomOffset:bottomOffset
@@ -497,6 +497,8 @@
     
     _animationDuration = 0.3f;
     _draggingEnabled = YES;
+    
+    _panelMarginTop = 0;
 }
 
 @end
