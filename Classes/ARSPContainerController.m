@@ -43,6 +43,9 @@
     if (self.panelViewController && self.panelViewController.view) {
         [self.view bringSubviewToFront:self.panelViewController.view];
     }
+    if(self.visibilityStateDelegate && _mainViewController && _panelViewController){
+        [self.visibilityStateDelegate panelControllerChangedVisibilityState:ARSPInitializeComplete];
+    }
 }
 
 - (void)setupMainViewControllerConstraints
@@ -101,6 +104,9 @@
     self.visibilityState = ARSPVisibilityStateMinimized;
     [self updateShadow];
     [self setDraggingEnabled:_draggingEnabled];
+    if(self.visibilityStateDelegate && _mainViewController && _panelViewController){
+        [self.visibilityStateDelegate panelControllerChangedVisibilityState:ARSPInitializeComplete];
+    }
 }
 
 - (void)setupPanelViewControllerConstraints

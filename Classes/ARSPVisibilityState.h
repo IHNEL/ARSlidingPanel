@@ -37,7 +37,11 @@ typedef enum {
     /**
      Panel View Controller is maximized - it's in fullscreen mode
      */
-    ARSPVisibilityStateMaximized
+    ARSPVisibilityStateMaximized,
+    /**
+     Panel View Controller and Main View Conroller are available.
+     */
+    ARSPInitializeComplete
 } ARSPVisibilityState;
 
 #endif
