@@ -243,13 +243,7 @@
         else {
             self.mainViewControllerTopConstraint.constant = 0.f;
         }
-        
-        if (self.shouldOverlapMainViewController || self.visibilityState == ARSPVisibilityStateIsClosing) {
-            self.mainViewControllerHeightConstraint.constant = 0;
-        }
-        else {
-            self.mainViewControllerHeightConstraint.constant = - self.visibleZoneHeight;
-        }
+        self.mainViewControllerHeightConstraint.constant = - self.visibleZoneHeight;
     }
     [self.view layoutIfNeeded];
 }
