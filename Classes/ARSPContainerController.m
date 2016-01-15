@@ -319,6 +319,10 @@
 
 - (void)maximizePanelControllerAnimated:(BOOL)animated animations:(void (^)(void))animations completion:(void (^)(void))completion
 {
+    if (self.visibilityStateDelegate) {
+        self.visibilityState = ARSPBeginMaximizing;
+        [self.visibilityStateDelegate panelControllerChangedVisibilityState:ARSPBeginMaximizing];
+    }
     self.visibilityState = ARSPVisibilityStateIsMaximizing;
     CGFloat animationDuration = (self.animationDuration ? : 0.3f);
     
@@ -340,6 +344,10 @@
 
 - (void)minimizePanelControllerAnimated:(BOOL)animated animations:(void (^)(void))animations completion:(void (^)(void))completion
 {
+    if (self.visibilityStateDelegate) {
+        self.visibilityState = ARSPBeginMinimizing;
+        [self.visibilityStateDelegate panelControllerChangedVisibilityState:ARSPBeginMinimizing];
+    }
     CGFloat bottomOffset = (self.panelViewControllerTopConstraint.constant == self.panelMarginTop)
     ? self.visibleZoneHeight - self.panelViewController.view.frame.size.height
     : self.visibleZoneHeight;

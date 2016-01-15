@@ -41,7 +41,15 @@ typedef enum {
     /**
      Panel View Controller and Main View Conroller are available.
      */
-    ARSPInitializeComplete
+    ARSPInitializeComplete,
+    /**
+     Panel view controller will become minimize
+     */
+    ARSPBeginMinimizing,
+    /**
+     Panel view controller will become maximize
+     */
+    ARSPBeginMaximizing
 } ARSPVisibilityState;
 
 #endif
